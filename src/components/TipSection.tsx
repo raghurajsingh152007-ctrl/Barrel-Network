@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Copy, Heart, Flame, Server, Code2 } from "lucide-react";
+import { Copy, Heart, Sparkles, Flame, Server, Code2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const TipSection = () => {
@@ -11,120 +11,150 @@ const TipSection = () => {
   };
 
   return (
-    <section id="tip" className="relative py-28 px-6">
+    <section id="tip" className="relative py-32 px-6 overflow-hidden">
       <div className="section-divider w-full max-w-xl mx-auto mb-28" />
-      <div className="container mx-auto max-w-2xl">
+
+      {/* Ambient background glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/[0.03] blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/3 right-0 w-[300px] h-[300px] rounded-full bg-primary/[0.04] blur-[100px] pointer-events-none" />
+
+      <div className="container mx-auto max-w-2xl relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-14"
         >
-          <span className="text-xs font-medium text-primary uppercase tracking-[0.3em] mb-3 block">
-            Support
-          </span>
+          <motion.div
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/5 mb-6"
+          >
+            <Sparkles size={12} className="text-primary" />
+            <span className="text-xs font-medium text-primary uppercase tracking-[0.3em]">
+              Support Us
+            </span>
+          </motion.div>
           <h2 className="text-4xl sm:text-5xl font-display font-bold text-foreground">
-            Tip the Server
+            Fuel the <span className="text-gradient-gold">Network</span>
           </h2>
-          <p className="text-muted-foreground mt-4 max-w-md mx-auto">
-            Enjoying Barrel Network? Your support keeps the lights on and the
-            servers humming.
+          <p className="text-muted-foreground mt-5 max-w-md mx-auto leading-relaxed">
+            Your generosity keeps the servers alive, the community thriving, and
+            the experience unforgettable.
           </p>
         </motion.div>
 
+        {/* Main tip card */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative rounded-2xl overflow-hidden"
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="relative group"
         >
-          {/* Decorative glow border */}
-          <div className="absolute -inset-px rounded-2xl bg-gradient-to-b from-primary/30 via-primary/5 to-transparent" />
+          {/* Animated border glow */}
+          <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-primary/40 via-primary/10 to-primary/5 opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
+          <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 
-          <div className="relative glass-card rounded-2xl p-10 text-center">
-            {/* Animated heart icon */}
-            <div className="relative w-20 h-20 mx-auto mb-6">
-              <div className="absolute inset-0 rounded-full bg-primary/10 animate-ping opacity-20" />
-              <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20">
-                <Heart size={32} className="text-primary" fill="currentColor" />
+          <div className="relative glass-card rounded-2xl overflow-hidden">
+            {/* Top decorative strip */}
+            <div className="h-1 w-full bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+
+            <div className="p-10 sm:p-12 text-center">
+              {/* Heart with layered glow */}
+              <div className="relative w-24 h-24 mx-auto mb-8">
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute inset-0 rounded-full bg-primary/8 blur-xl"
+                />
+                <motion.div
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+                  className="absolute inset-2 rounded-full bg-primary/10 blur-md"
+                />
+                <div className="relative w-24 h-24 rounded-full bg-gradient-to-br from-primary/15 via-primary/10 to-transparent flex items-center justify-center border border-primary/15">
+                  <motion.div
+                    animate={{ scale: [1, 1.15, 1] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <Heart size={36} className="text-primary drop-shadow-lg" fill="currentColor" />
+                  </motion.div>
+                </div>
               </div>
-            </div>
 
-            <h3 className="text-2xl font-display font-bold text-foreground mb-2">
-              Send a Tip via UPI
-            </h3>
-            <p className="text-sm text-muted-foreground mb-8 max-w-xs mx-auto leading-relaxed">
-              Every contribution helps us keep the servers alive and improve the
-              experience for everyone.
-            </p>
+              <h3 className="text-2xl sm:text-3xl font-display font-bold text-foreground mb-3">
+                Send a Tip via UPI
+              </h3>
+              <p className="text-sm text-secondary-foreground mb-10 max-w-sm mx-auto leading-relaxed">
+                Every contribution, big or small, fuels the servers and makes the
+                Barrel Network experience better for everyone.
+              </p>
 
-            {/* UPI copy area */}
-            <div className="inline-flex items-center gap-2 px-2 py-2 rounded-xl bg-secondary/60 border border-border/50 mb-3">
-              <code className="text-sm font-mono text-primary px-4 py-2">
-                8307650450@fam
-              </code>
-              <button
-                onClick={copyUPI}
-                className="px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-semibold hover:brightness-110 transition-all duration-300"
-              >
-                <Copy size={14} className="inline mr-1.5 -mt-0.5" />
-                Copy
-              </button>
+              {/* UPI copy widget */}
+              <div className="inline-flex items-center gap-0 rounded-xl border border-border/60 bg-secondary/40 overflow-hidden shadow-lg shadow-primary/5">
+                <code className="text-sm sm:text-base font-mono text-primary px-5 sm:px-6 py-3.5 tracking-wide">
+                  8307650450@fam
+                </code>
+                <button
+                  onClick={copyUPI}
+                  className="flex items-center gap-2 px-5 sm:px-6 py-3.5 bg-primary text-primary-foreground text-sm font-semibold hover:brightness-110 active:scale-95 transition-all duration-200 border-l border-primary/30"
+                >
+                  <Copy size={14} />
+                  Copy
+                </button>
+              </div>
+
+              <p className="text-xs text-muted-foreground mt-4 tracking-wide">
+                Paste in any UPI app to send your tip ☕
+              </p>
             </div>
-            <p className="text-xs text-muted-foreground mt-2">
-              Paste in any UPI app to send your tip
-            </p>
           </div>
         </motion.div>
 
         {/* Made by credits */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.3 }}
-          className="mt-16"
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="mt-20"
         >
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <div className="h-px flex-1 max-w-16 bg-gradient-to-r from-transparent to-border" />
-            <span className="text-xs text-muted-foreground uppercase tracking-[0.3em]">
-              Made with
-            </span>
-            <Flame size={14} className="text-primary" />
-            <span className="text-xs text-muted-foreground uppercase tracking-[0.3em]">
-              by
-            </span>
-            <div className="h-px flex-1 max-w-16 bg-gradient-to-l from-transparent to-border" />
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <div className="h-px flex-1 max-w-20 bg-gradient-to-r from-transparent to-border/60" />
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <span className="text-[11px] uppercase tracking-[0.3em]">Made with</span>
+              <Flame size={13} className="text-primary" />
+              <span className="text-[11px] uppercase tracking-[0.3em]">by</span>
+            </div>
+            <div className="h-px flex-1 max-w-20 bg-gradient-to-l from-transparent to-border/60" />
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <div className="glass-card-hover rounded-xl px-6 py-4 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                <Server size={16} className="text-primary" />
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-semibold text-foreground">
-                  Himanshu Rathore
-                </p>
-                <p className="text-[11px] text-muted-foreground uppercase tracking-widest">
-                  Server Creator
-                </p>
-              </div>
-            </div>
-
-            <div className="glass-card-hover rounded-xl px-6 py-4 flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-                <Code2 size={16} className="text-primary" />
-              </div>
-              <div className="text-left">
-                <p className="text-sm font-semibold text-foreground">
-                  Raghuraj Singh
-                </p>
-                <p className="text-[11px] text-muted-foreground uppercase tracking-widest">
-                  Website Designer
-                </p>
-              </div>
-            </div>
+            {[
+              { name: "Himanshu Rathore", role: "Server Creator", icon: <Server size={16} /> },
+              { name: "Raghuraj Singh", role: "Website Designer", icon: <Code2 size={16} /> },
+            ].map((person, i) => (
+              <motion.div
+                key={person.name}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 + i * 0.1 }}
+                className="glass-card-hover rounded-xl px-6 py-4 flex items-center gap-3 group cursor-default"
+              >
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/20 transition-colors duration-300">
+                  {person.icon}
+                </div>
+                <div className="text-left">
+                  <p className="text-sm font-semibold text-foreground">{person.name}</p>
+                  <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em]">{person.role}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </motion.div>
       </div>
