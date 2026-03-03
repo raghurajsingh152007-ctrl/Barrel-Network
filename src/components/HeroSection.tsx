@@ -78,20 +78,20 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="#servers"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm tracking-wide hover:brightness-110 transition-all duration-300 glow-gold"
+          <button
+            onClick={() => document.getElementById("servers")?.scrollIntoView({ behavior: "smooth" })}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm tracking-wide hover:brightness-110 transition-all duration-300 glow-gold border-none cursor-pointer"
           >
             <Server size={18} />
             View Servers
-          </a>
-          <a
-            href="#rules"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-border text-foreground font-semibold text-sm tracking-wide hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+          </button>
+          <button
+            onClick={() => document.getElementById("rules")?.scrollIntoView({ behavior: "smooth" })}
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-border bg-transparent text-foreground font-semibold text-sm tracking-wide hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer"
           >
             <Shield size={18} />
             Read Rules
-          </a>
+          </button>
         </motion.div>
       </div>
 
