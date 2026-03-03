@@ -1,7 +1,15 @@
 import { motion } from "framer-motion";
-import { ChevronDown, Server, Shield } from "lucide-react";
+import { ChevronDown, Server, Shield, Users, Loader2 } from "lucide-react";
+import { useServerStatus } from "@/hooks/use-server-status";
 
 const HeroSection = () => {
+  const smp = useServerStatus("BarrelSMPS2.aternos.me:59011");
+  const box = useServerStatus("BarrelBoxS3.aternos.me:25082");
+
+  const anyOnline = smp.online || box.online;
+  const totalPlayers = (smp.players?.online ?? 0) + (box.players?.online ?? 0);
+  const isLoading = smp.loading || box.loading;
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
