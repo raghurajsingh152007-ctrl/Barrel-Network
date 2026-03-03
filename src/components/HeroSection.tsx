@@ -28,10 +28,28 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-xs font-medium text-primary uppercase tracking-widest">
-            Servers Online
-          </span>
+          {isLoading ? (
+            <>
+              <Loader2 size={12} className="animate-spin text-primary" />
+              <span className="text-xs font-medium text-primary uppercase tracking-widest">
+                Checking Servers…
+              </span>
+            </>
+          ) : anyOnline ? (
+            <>
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-xs font-medium text-primary uppercase tracking-widest">
+                {totalPlayers} Player{totalPlayers !== 1 ? "s" : ""} Online
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="w-2 h-2 rounded-full bg-destructive" />
+              <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                Servers Offline
+              </span>
+            </>
+          )}
         </motion.div>
 
         <motion.h1
