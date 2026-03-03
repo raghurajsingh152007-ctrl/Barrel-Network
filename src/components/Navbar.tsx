@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Rules", href: "#rules" },
   { label: "Gallery", href: "#gallery" },
   { label: "Support", href: "#tip" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
