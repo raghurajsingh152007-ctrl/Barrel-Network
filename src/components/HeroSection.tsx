@@ -1,7 +1,15 @@
 import { motion } from "framer-motion";
-import { ChevronDown, Server, Shield } from "lucide-react";
+import { ChevronDown, Server, Shield, Users, Loader2 } from "lucide-react";
+import { useServerStatus } from "@/hooks/use-server-status";
 
 const HeroSection = () => {
+  const smp = useServerStatus("BarrelSMPS2.aternos.me:59011");
+  const box = useServerStatus("BarrelBoxS3.aternos.me:25082");
+
+  const anyOnline = smp.online || box.online;
+  const totalPlayers = (smp.players?.online ?? 0) + (box.players?.online ?? 0);
+  const isLoading = smp.loading || box.loading;
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -20,10 +28,28 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 mb-8"
         >
-          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          <span className="text-xs font-medium text-primary uppercase tracking-widest">
-            Servers Online
-          </span>
+          {isLoading ? (
+            <>
+              <Loader2 size={12} className="animate-spin text-primary" />
+              <span className="text-xs font-medium text-primary uppercase tracking-widest">
+                Checking Servers…
+              </span>
+            </>
+          ) : anyOnline ? (
+            <>
+              <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+              <span className="text-xs font-medium text-primary uppercase tracking-widest">
+                {totalPlayers} Player{totalPlayers !== 1 ? "s" : ""} Online
+              </span>
+            </>
+          ) : (
+            <>
+              <span className="w-2 h-2 rounded-full bg-destructive" />
+              <span className="text-xs font-medium text-muted-foreground uppercase tracking-widest">
+                Servers Offline
+              </span>
+            </>
+          )}
         </motion.div>
 
         <motion.h1
