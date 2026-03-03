@@ -39,13 +39,16 @@ const Navbar = () => {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <button
               key={link.label}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300 tracking-wide uppercase"
+              onClick={() => {
+                const el = document.getElementById(link.href.replace("#", ""));
+                el?.scrollIntoView({ behavior: "smooth" });
+              }}
+              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors duration-300 tracking-wide uppercase bg-transparent border-none cursor-pointer"
             >
               {link.label}
-            </a>
+            </button>
           ))}
         </div>
 
@@ -69,14 +72,17 @@ const Navbar = () => {
           >
             <div className="flex flex-col p-4 gap-3">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 uppercase tracking-wide"
+                  onClick={() => {
+                    setMobileOpen(false);
+                    const el = document.getElementById(link.href.replace("#", ""));
+                    el?.scrollIntoView({ behavior: "smooth" });
+                  }}
+                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2 uppercase tracking-wide bg-transparent border-none cursor-pointer text-left"
                 >
                   {link.label}
-                </a>
+                </button>
               ))}
             </div>
           </motion.div>
