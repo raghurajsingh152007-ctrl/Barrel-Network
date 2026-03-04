@@ -17,7 +17,9 @@ export function useServerStatus(address: string): ServerStatus {
 
   const fetchStatus = useCallback(async () => {
     try {
-      const res = await fetch(`https://api.mcstatus.io/v2/status/java/${address}`);
+      const res = await fetch(`https://api.mcstatus.io/v2/status/java/${address}?timeout=5`, {
+  cache: "no-store"
+}) ;
       if (!res.ok) throw new Error("API error");
       const data = await res.json();
       setStatus({
