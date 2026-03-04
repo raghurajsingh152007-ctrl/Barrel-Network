@@ -41,7 +41,7 @@ export function useServerStatus(address: string) {
 
     fetchStatus();
 
-    const interval = setInterval(fetchStatus, 30000); // refresh every 30 sec
+    const interval = setInterval(fetchStatus, 5000); // refresh every 30 sec
     return () => clearInterval(interval);
   }, [address]);
 
