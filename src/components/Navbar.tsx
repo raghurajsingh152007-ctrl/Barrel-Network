@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import DiscordIcon from "@/components/DiscordIcon";
+
+const DISCORD_URL = "https://discord.gg/RYyFvzr4CR";
 
 const navLinks = [
   { label: "Servers", href: "#servers" },
@@ -50,6 +53,15 @@ const Navbar = () => {
               {link.label}
             </button>
           ))}
+          <a
+            href={DISCORD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/30 bg-primary/10 text-primary text-sm font-semibold tracking-wide hover:bg-primary/20 hover:border-primary/50 transition-all duration-300"
+          >
+            <DiscordIcon size={16} />
+            Discord
+          </a>
         </div>
 
         {/* Mobile toggle */}
@@ -84,6 +96,15 @@ const Navbar = () => {
                   {link.label}
                 </button>
               ))}
+              <a
+                href={DISCORD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-primary/30 bg-primary/10 text-primary text-sm font-semibold tracking-wide hover:bg-primary/20 transition-all duration-300 mt-1"
+              >
+                <DiscordIcon size={16} />
+                Discord
+              </a>
             </div>
           </motion.div>
         )}

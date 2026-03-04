@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
-import { ChevronDown, Server, Shield, Users, Loader2 } from "lucide-react";
+import { ChevronDown, Server, Shield, Loader2 } from "lucide-react";
 import { useServerStatus } from "@/hooks/use-server-status";
+import DiscordIcon from "@/components/DiscordIcon";
+
+const DISCORD_URL = "https://discord.gg/RYyFvzr4CR";
 
 const HeroSection = () => {
   const smp = useServerStatus("BarrelSMPS2.aternos.me:59011");
@@ -92,6 +95,15 @@ const HeroSection = () => {
             <Shield size={18} />
             Read Rules
           </button>
+          <a
+            href={DISCORD_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-primary/30 bg-primary/10 text-primary font-semibold text-sm tracking-wide hover:bg-primary/20 hover:border-primary/50 transition-all duration-300"
+          >
+            <DiscordIcon size={18} />
+            Join Discord
+          </a>
         </motion.div>
       </div>
 
