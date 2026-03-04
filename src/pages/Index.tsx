@@ -6,10 +6,12 @@ import GallerySection from "@/components/GallerySection";
 import TipSection from "@/components/TipSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import BackgroundSlideshow from "@/components/BackgroundSlideshow";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen">
+      <BackgroundSlideshow />
       <Navbar />
       <HeroSection />
       <ServersSection />
