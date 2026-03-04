@@ -1,43 +1,49 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
-export interface ServerStatus {
-  online: boolean;
-  players: { online: number; max: number } | null;
-  version: string | null;
-  loading: boolean;
-}
-
-export function useServerStatus(address: string): ServerStatus {
-  const [status, setStatus] = useState<ServerStatus>({
+export function useServerStatus(address: string) {
+  const [status, setStatus] = useState({
     online: false,
-    players: null,
-    version: null,
+    players: null as { online: number; max: number } | null,
+    version: null as string | null,
     loading: true,
   });
 
-  const fetchStatus = useCallback(async () => {
-    try {
-      const res = await fetch(`https://api.mcstatus.io/v2/status/java/${address}?timeout=5`, {
-  cache: "no-store"
-}) ;
-      if (!res.ok) throw new Error("API error");
-      const data = await res.json();
-      setStatus({
-        online: data.online ?? false,
-        players: data.online ? { online: data.players?.online ?? 0, max: data.players?.max ?? 0 } : null,
-        version: data.version?.name_clean ?? null,
-        loading: false,
-      });
-    } catch {
-      setStatus({ online: false, players: null, version: null, loading: false });
-    }
-  }, [address]);
-
   useEffect(() => {
+    async function fetchStatus() {
+      try {
+        const response = await fetch(
+          `https://api.mcsrvstat.us/2/${address}`,
+          { cache: "no-store" }
+        );
+
+        const data = await response.json();
+
+        setStatus({
+          online: data.online,
+          players: data.online
+            ? {
+                online: data.players?.online ?? 0,
+                max: data.players?.max ?? 0,
+              }
+            : null,
+          version: data.version ?? null,
+          loading: false,
+        });
+      } catch (error) {
+        setStatus({
+          online: false,
+          players: null,
+          version: null,
+          loading: false,
+        });
+      }
+    }
+
     fetchStatus();
-    const interval = setInterval(fetchStatus, 30000);
+
+    const interval = setInterval(fetchStatus, 30000); // refresh every 30 sec
     return () => clearInterval(interval);
-  }, [fetchStatus]);
+  }, [address]);
 
   return status;
 }
