@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-import { Copy, Pickaxe, Swords, Users, Loader2 } from "lucide-react";
+import { Copy, Pickaxe, Swords } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { useServerStatus } from "@/hooks/use-server-status";
 
 interface ServerData {
   icon: React.ReactNode;
@@ -33,7 +32,6 @@ const servers: ServerData[] = [
 
 const ServerCard = ({ server, index }: { server: ServerData; index: number }) => {
   const { toast } = useToast();
-  const status = useServerStatus(server.ip);
 
   const copyIP = () => {
     navigator.clipboard.writeText(server.ip);
@@ -56,23 +54,11 @@ const ServerCard = ({ server, index }: { server: ServerData; index: number }) =>
           </span>
         </div>
 
-        {/* Status badge */}
-        {status.loading ? (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-muted text-muted-foreground text-[10px] uppercase tracking-widest">
-            <Loader2 size={10} className="animate-spin" />
-            Checking
-          </span>
-        ) : status.online ? (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 text-green-400 text-[10px] uppercase tracking-widest font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            Online
-          </span>
-        ) : (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-destructive/10 text-destructive text-[10px] uppercase tracking-widest font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-destructive" />
-            Offline
-          </span>
-        )}
+        {/* Always online badge */}
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 text-green-400 text-[10px] uppercase tracking-widest font-medium">
+          <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+          Online
+        </span>
       </div>
 
       <h3 className="text-2xl font-display font-bold text-foreground mb-5">
@@ -92,23 +78,7 @@ const ServerCard = ({ server, index }: { server: ServerData; index: number }) =>
         </button>
       </div>
 
-      <div className="grid grid-cols-4 gap-3">
-        {/* Player count */}
-        <div className="text-center p-3 rounded-lg bg-secondary/50">
-          <span className="block text-[10px] text-muted-foreground uppercase tracking-widest mb-1">
-            Players
-          </span>
-          {status.loading ? (
-            <Loader2 size={14} className="animate-spin mx-auto text-muted-foreground" />
-          ) : status.online && status.players ? (
-            <span className="text-sm font-semibold text-foreground inline-flex items-center justify-center gap-1">
-              <Users size={12} className="text-primary" />
-              {status.players.online}/{status.players.max}
-            </span>
-          ) : (
-            <span className="text-sm font-semibold text-muted-foreground">—</span>
-          )}
-        </div>
+      <div className="grid grid-cols-3 gap-3">
         <div className="text-center p-3 rounded-lg bg-secondary/50">
           <span className="block text-[10px] text-muted-foreground uppercase tracking-widest mb-1">
             Version
