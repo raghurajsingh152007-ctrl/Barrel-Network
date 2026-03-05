@@ -1,10 +1,15 @@
 import { motion } from "framer-motion";
 import { ChevronDown, Server, Shield } from "lucide-react";
 import DiscordIcon from "@/components/DiscordIcon";
+import barrelLogo from "@/assets/barrel-logo.png";
 
 const DISCORD_URL = "https://discord.gg/RYyFvzr4CR";
 
 const HeroSection = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background */}
@@ -29,15 +34,31 @@ const HeroSection = () => {
           </span>
         </motion.div>
 
-        <motion.h1
+        {/* Title with barrel image */}
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-5xl sm:text-7xl lg:text-8xl font-display font-bold leading-tight mb-6"
+          className="flex items-center justify-center gap-4 sm:gap-6 mb-6"
         >
-          <span className="text-foreground">Barrel</span>{" "}
-          <span className="text-gradient-gold">Network</span>
-        </motion.h1>
+          <motion.img
+            src={barrelLogo}
+            alt="Barrel"
+            onClick={scrollToTop}
+            className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain cursor-pointer drop-shadow-[0_0_20px_hsl(32_90%_55%/0.4)]"
+            whileHover={{
+              scale: 1.15,
+              rotate: [0, -8, 8, -4, 0],
+              filter: "drop-shadow(0 0 30px hsl(32 90% 55% / 0.6))",
+            }}
+            whileTap={{ scale: 0.9 }}
+            transition={{ duration: 0.5 }}
+          />
+          <h1 className="text-5xl sm:text-7xl lg:text-8xl font-display font-bold leading-tight">
+            <span className="text-foreground">Barrel</span>{" "}
+            <span className="text-gradient-gold">Network</span>
+          </h1>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
