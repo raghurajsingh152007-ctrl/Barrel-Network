@@ -49,7 +49,7 @@ const Navbar = () => {
           <motion.img
             src={barrelLogo}
             alt="Barrel Network"
-            className="w-8 h-8 object-contain drop-shadow-[0_0_8px_hsl(32_90%_55%/0.4)] mix-blend-lighten"
+            className="w-8 h-8 object-contain drop-shadow-[0_0_8px_hsl(32_90%_55%/0.4)]"
             whileHover={{ rotate: [0, -10, 10, -5, 0] }}
             transition={{ duration: 0.5 }}
           />
