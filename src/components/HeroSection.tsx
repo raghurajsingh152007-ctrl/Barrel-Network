@@ -45,7 +45,7 @@ const HeroSection = () => {
             src={barrelLogo}
             alt="Barrel"
             onClick={scrollToTop}
-            className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain cursor-pointer drop-shadow-[0_0_20px_hsl(32_90%_55%/0.4)]"
+            className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 object-contain cursor-pointer drop-shadow-[0_0_20px_hsl(32_90%_55%/0.4)] mix-blend-lighten"
             whileHover={{
               scale: 1.15,
               rotate: [0, -8, 8, -4, 0],
