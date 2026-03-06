@@ -46,11 +46,11 @@ const Navbar = () => {
           whileTap={{ scale: 0.95 }}
           className="flex items-center gap-2.5 group bg-transparent border-none cursor-pointer px-3 py-1.5 rounded-lg hover:bg-primary/5 transition-colors duration-300"
         >
-          <div className="w-8 h-8 overflow-hidden rounded">
+          <div className="w-8 h-8 overflow-hidden rounded bg-background">
             <motion.img
               src={barrelLogo}
               alt="Barrel Network"
-              className="w-[120%] h-[120%] object-cover drop-shadow-[0_0_8px_hsl(32_90%_55%/0.4)] -m-[10%]"
+              className="w-[130%] h-[130%] object-cover drop-shadow-[0_0_8px_hsl(32_90%_55%/0.4)] -m-[15%]"
               whileHover={{ rotate: [0, -10, 10, -5, 0] }}
               transition={{ duration: 0.5 }}
             />

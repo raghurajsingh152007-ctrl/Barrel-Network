@@ -41,12 +41,12 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex items-center justify-center gap-4 sm:gap-6 mb-6"
         >
-          <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden rounded-lg">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 overflow-hidden rounded-lg bg-background">
             <motion.img
               src={barrelLogo}
               alt="Barrel"
               onClick={scrollToTop}
-              className="w-[120%] h-[120%] object-cover cursor-pointer drop-shadow-[0_0_20px_hsl(32_90%_55%/0.4)] -m-[10%]"
+              className="w-[130%] h-[130%] object-cover cursor-pointer drop-shadow-[0_0_20px_hsl(32_90%_55%/0.4)] -m-[15%]"
               whileHover={{
                 scale: 1.15,
                 rotate: [0, -8, 8, -4, 0],
