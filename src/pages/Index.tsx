@@ -8,11 +8,15 @@ import TipSection from "@/components/TipSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import BackgroundSlideshow from "@/components/BackgroundSlideshow";
+import ParticleNetwork from "@/components/ParticleNetwork";
+import CursorGlow from "@/components/CursorGlow";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <BackgroundSlideshow />
+      <ParticleNetwork />
+      <CursorGlow />
       <Navbar />
       <HeroSection />
       <ServersSection />

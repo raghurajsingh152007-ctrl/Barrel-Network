@@ -20,13 +20,18 @@ const HeroSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
+      {/* Floating orbs */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-primary/[0.04] blur-[120px] float-orb pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-primary/[0.06] blur-[100px] float-orb-reverse pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary/[0.03] blur-[150px] float-orb-slow pointer-events-none" />
+
       {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+      <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 mb-8"
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-primary/30 bg-primary/10 glass-premium mb-10"
         >
           <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
           <span className="text-xs font-medium text-primary uppercase tracking-widest">
@@ -38,7 +43,7 @@ const HeroSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          transition={{ duration: 1, delay: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
           className="flex items-center justify-center gap-4 sm:gap-6 mb-6"
         >
           <motion.img
@@ -56,7 +61,11 @@ const HeroSection = () => {
           />
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-display font-bold leading-tight">
             <span className="text-foreground">Barrel</span>{" "}
-            <span className="text-gradient-gold">Network</span>
+            <span className="text-gradient-gold relative">
+              Network
+              {/* Glow behind accent word */}
+              <span className="absolute inset-0 blur-2xl bg-primary/20 -z-10" />
+            </span>
           </h1>
         </motion.div>
 
@@ -64,7 +73,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
         >
           A Minecraft community built on fair play, exceptional builds, and
           camaraderie. Dive into SMP survival or prove your mettle in Box PvP.
@@ -76,29 +85,35 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <button
+          <motion.button
             onClick={() => document.getElementById("servers")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-primary text-primary-foreground font-semibold text-sm tracking-wide hover:brightness-110 transition-all duration-300 glow-gold border-none cursor-pointer"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            className="btn-premium inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-primary-foreground font-semibold text-sm tracking-wide glow-gold-intense border-none cursor-pointer"
           >
             <Server size={18} />
             View Servers
-          </button>
-          <button
+          </motion.button>
+          <motion.button
             onClick={() => document.getElementById("rules")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-border bg-transparent text-foreground font-semibold text-sm tracking-wide hover:border-primary/50 hover:bg-primary/5 transition-all duration-300 cursor-pointer"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-border/60 bg-secondary/20 backdrop-blur-sm text-foreground font-semibold text-sm tracking-wide hover:border-primary/40 hover:bg-primary/5 transition-all duration-500 cursor-pointer"
           >
             <Shield size={18} />
             Read Rules
-          </button>
-          <a
+          </motion.button>
+          <motion.a
             href={DISCORD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg border border-primary/30 bg-primary/10 text-primary font-semibold text-sm tracking-wide hover:bg-primary/20 hover:border-primary/50 transition-all duration-300"
+            whileHover={{ scale: 1.04, y: -2 }}
+            whileTap={{ scale: 0.97 }}
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border border-primary/30 bg-primary/10 backdrop-blur-sm text-primary font-semibold text-sm tracking-wide hover:bg-primary/20 hover:border-primary/50 transition-all duration-500"
           >
             <DiscordIcon size={18} />
             Join Discord
-          </a>
+          </motion.a>
         </motion.div>
       </div>
 
