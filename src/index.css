@@ -58,14 +58,24 @@
 
   html {
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+  }
+
+  /* Premium smooth scrolling */
+  @supports (scroll-behavior: smooth) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 }
 
@@ -80,27 +90,141 @@
   .glass-card {
     background: hsl(var(--surface-glass) / 0.6);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid hsl(var(--border) / 0.5);
   }
 
   .glass-card-hover {
     background: hsl(var(--surface-glass) / 0.6);
     backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     border: 1px solid hsl(var(--border) / 0.5);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .glass-card-hover:hover {
     border-color: hsl(var(--gold-glow) / 0.3);
-    box-shadow: 0 0 40px hsl(var(--gold-glow) / 0.08);
+    box-shadow: 
+      0 0 40px hsl(var(--gold-glow) / 0.08),
+      0 8px 32px hsl(0 0% 0% / 0.3),
+      inset 0 1px 0 hsl(var(--gold-glow) / 0.1);
+    background: hsl(var(--surface-glass) / 0.7);
+  }
+
+  .glass-premium {
+    background: hsl(var(--surface-glass) / 0.4);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid hsl(var(--border) / 0.3);
+    box-shadow: 
+      0 8px 32px hsl(0 0% 0% / 0.2),
+      inset 0 1px 0 hsl(var(--foreground) / 0.05);
   }
 
   .glow-gold {
     box-shadow: 0 0 30px hsl(var(--gold-glow) / 0.2), 0 0 60px hsl(var(--gold-glow) / 0.1);
   }
 
+  .glow-gold-intense {
+    box-shadow: 
+      0 0 20px hsl(var(--gold-glow) / 0.3),
+      0 0 40px hsl(var(--gold-glow) / 0.15),
+      0 0 80px hsl(var(--gold-glow) / 0.08);
+  }
+
   .section-divider {
     background: linear-gradient(90deg, transparent, hsl(var(--gold-glow) / 0.3), transparent);
     height: 1px;
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+  }
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      var(--gradient-angle, 135deg),
+      hsl(var(--gold-glow) / 0.5),
+      hsl(var(--gold-dim) / 0.2),
+      hsl(var(--gold-glow) / 0.5)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: gradient-rotate 4s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes gradient-rotate {
+    to { --gradient-angle: 495deg; }
+  }
+
+  @property --gradient-angle {
+    syntax: '<angle>';
+    initial-value: 135deg;
+    inherits: false;
+  }
+
+  /* Liquid gradient animation */
+  @keyframes liquid-gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .liquid-gradient {
+    background-size: 200% 200%;
+    animation: liquid-gradient 8s ease infinite;
+  }
+
+  /* Floating orb animation */
+  @keyframes float-orb {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(30px, -20px) scale(1.05); }
+    50% { transform: translate(-20px, 20px) scale(0.95); }
+    75% { transform: translate(15px, 10px) scale(1.02); }
+  }
+
+  .float-orb {
+    animation: float-orb 12s ease-in-out infinite;
+  }
+
+  .float-orb-slow {
+    animation: float-orb 18s ease-in-out infinite;
+  }
+
+  .float-orb-reverse {
+    animation: float-orb 15s ease-in-out infinite reverse;
+  }
+
+  /* Premium button glow */
+  .btn-premium {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-premium::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      45deg,
+      transparent 30%,
+      hsl(var(--foreground) / 0.1) 50%,
+      transparent 70%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  .btn-premium:hover::before {
+    transform: translateX(100%);
   }
 }

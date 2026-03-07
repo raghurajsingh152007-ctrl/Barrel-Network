@@ -18,11 +18,33 @@ const navLinks = [
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handler);
     return () => window.removeEventListener("scroll", handler);
+  }, []);
+
+  // Track active section
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection("#" + entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    navLinks.forEach((link) => {
+      const el = document.getElementById(link.href.replace("#", ""));
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const scrollToTop = () => {
@@ -34,8 +56,10 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "glass-card py-2" : "py-4 bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
+        scrolled
+          ? "glass-premium py-2 shadow-[0_4px_30px_hsl(0_0%_0%/0.3)]"
+          : "py-4 bg-transparent"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-6">
@@ -58,8 +82,8 @@ const Navbar = () => {
           </span>
         </motion.button>
 
-        {/* Desktop nav — boxed style */}
-        <div className="hidden md:flex items-center gap-2">
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-1.5">
           {navLinks.map((link, i) => (
             <motion.button
               key={link.label}
@@ -70,23 +94,34 @@ const Navbar = () => {
                 const el = document.getElementById(link.href.replace("#", ""));
                 el?.scrollIntoView({ behavior: "smooth" });
               }}
-              whileHover={{ scale: 1.05, y: -1 }}
+              whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="text-xs font-medium text-muted-foreground hover:text-primary px-3.5 py-2 rounded-lg border border-border/50 bg-secondary/30 hover:border-primary/30 hover:bg-primary/10 transition-all duration-300 tracking-widest uppercase cursor-pointer"
+              className={`relative text-xs font-medium px-3.5 py-2 rounded-lg transition-all duration-300 tracking-widest uppercase cursor-pointer border ${
+                activeSection === link.href
+                  ? "text-primary border-primary/30 bg-primary/10"
+                  : "text-muted-foreground border-transparent hover:text-foreground hover:bg-secondary/40"
+              }`}
             >
               {link.label}
+              {activeSection === link.href && (
+                <motion.div
+                  layoutId="activeNav"
+                  className="absolute -bottom-px left-1/4 right-1/4 h-px bg-primary"
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                />
+              )}
             </motion.button>
           ))}
           <motion.a
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 + navLinks.length * 0.05, duration: 0.4 }}
-            whileHover={{ scale: 1.05, y: -1 }}
+            whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.97 }}
             href={DISCORD_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg border border-primary/30 bg-primary/10 text-primary text-xs font-semibold tracking-widest uppercase hover:bg-primary/20 hover:border-primary/50 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 text-primary text-xs font-semibold tracking-widest uppercase hover:bg-primary/20 hover:shadow-[0_0_20px_hsl(var(--gold-glow)/0.15)] transition-all duration-500 border border-primary/20"
           >
             <DiscordIcon size={14} />
             Discord
@@ -96,7 +131,7 @@ const Navbar = () => {
         {/* Mobile toggle */}
         <motion.button
           whileTap={{ scale: 0.9 }}
-          className="md:hidden text-foreground bg-transparent border-none cursor-pointer p-2 rounded-lg border border-border/50"
+          className="md:hidden text-foreground bg-transparent border-none cursor-pointer p-2 rounded-lg"
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -110,7 +145,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-card mx-4 mt-2 rounded-lg overflow-hidden"
+            className="md:hidden glass-premium mx-4 mt-2 rounded-xl overflow-hidden"
           >
             <div className="flex flex-col p-4 gap-2">
               {navLinks.map((link, i) => (
@@ -124,7 +159,11 @@ const Navbar = () => {
                     const el = document.getElementById(link.href.replace("#", ""));
                     el?.scrollIntoView({ behavior: "smooth" });
                   }}
-                  className="text-sm font-medium text-muted-foreground hover:text-primary transition-all py-2.5 px-4 uppercase tracking-wide bg-secondary/30 border border-border/50 rounded-lg hover:border-primary/30 hover:bg-primary/10 cursor-pointer text-left"
+                  className={`text-sm font-medium transition-all py-2.5 px-4 uppercase tracking-wide rounded-lg cursor-pointer text-left ${
+                    activeSection === link.href
+                      ? "text-primary bg-primary/10 border border-primary/30"
+                      : "text-muted-foreground hover:text-primary border border-transparent hover:border-border/50 hover:bg-secondary/30"
+                  }`}
                 >
                   {link.label}
                 </motion.button>
