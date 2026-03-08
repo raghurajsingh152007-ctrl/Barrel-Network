@@ -1,73 +1,53 @@
-# Welcome to your Lovable project
+Barrel Network Website
 
-## Project info
+Welcome to the Barrel Network Website – the official web portal for the Barrel Minecraft Server Network.
+This website provides players with information about the server, staff members, galleries, and support links.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+🌐 Live Website:
+https://raghurajsingh152007-ctrl.github.io/Barrel-Network/
 
-## How can I edit this code?
+About the Project
 
-There are several ways of editing your application.
+The Barrel Network Website is designed to provide a clean and simple interface for players who want to learn more about the server network.
 
-**Use Lovable**
+It acts as a central hub where users can:
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+View server information
 
-Changes made via Lovable will be committed automatically to this repo.
+Meet the staff team
 
-**Use your preferred IDE**
+Explore server galleries
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Access support resources
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Find important links and IDs
 
-Follow these steps:
+The goal of this website is to create a modern, minimal, and Minecraft-themed experience for the community.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Features
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+🎮 Minecraft Server Information
 
-# Step 3: Install the necessary dependencies.
-npm i
+👥 Staff Team Section
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+🖼️ Gallery Section
 
-**Edit a file directly in GitHub**
+📞 Support / Contact IDs
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+🌐 Fully Online Static Website
 
-**Use GitHub Codespaces**
+⚡ Fast Loading (GitHub Pages)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Technologies Used
 
-## What technologies are used for this project?
+This project is built using standard web technologies:
 
-This project is built with:
+HTML5
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+CSS3
 
-## How can I deploy this project?
+JavaScript
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+GitHub Pages (for hosting)
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+These technologies allow the site to run as a lightweight static website.
