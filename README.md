@@ -4,7 +4,7 @@ Welcome to the Barrel Network Website – the official web portal for the Barrel
 This website provides players with information about the server, staff members, galleries, and support links.
 
 🌐 Live Website:
-https://raghurajsingh152007-ctrl.github.io/Barrel-Network/
+https://Raghu-here.github.io/Barrel-Network/
 
 About the Project
 
